@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
+        type="text/javascript" charset="utf-8"></script>
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
+        type="text/javascript" charset="utf-8"></script>
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"
+        type="text/javascript" charset="utf-8"></script>
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"
+        type="text/javascript" charset="utf-8"></script>
+
+        <script src="./sampleApp.js"
+        type="text/javascript" charset="utf-8"></script>
+        
+         <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css">
+         <style>
+          .loader {
+            display:none;
+            border: 6px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 6px solid blue;
+            border-bottom: 6px solid blue;
+            width: 20px;
+            height: 20px;
+            -webkit-animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
+          }
+
+          input[type=text] {
+            margin: 2px;
+          }
+          
+          @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+          }
+          
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+          </style>
+    </head>
+    <body onload="customMap.initializeMap()">
+      
+        <input type="text" id="q_addr1" size="60" 
+          placeholder="Input Address to view on map" 
+          onchange="routeBtn.disabled = this.value.trim().length == 0 || q_addr2.value.trim().length == 0"/>
+        <button onclick="displayAddr(q_addr1.value)">Show on map</button><br/>
+        
+        <input type="text" id="q_addr2" size="60" 
+          placeholder="Input Address to route on map" 
+          value="gateway of india, mumbai"
+          onchange="routeBtn.disabled = this.value.trim().length == 0 || q_addr1.value.trim().length == 0"/>
+        <button onclick="displayRoute(q_addr1.value,q_addr2.value)" id="routeBtn" disabled="">Route</button>
+        
+        <div class="loader" id="loader"></div>
+        <div class="info" id="info"></div>
+        <hr/>
+        <div style="width: 800px; height: 500px" id="mapContainer"></div>
+    </body>
+
+</html>
